@@ -1,6 +1,6 @@
 # foundrycli.py (🔥, 🐍)
 
-**`foundrycli.py`** is a Python library I had made for personal use; <u>now open source</u>.
+**`foundrycli.py`** is a Python library I have made for personal use; now open source.
 
 It let's you access `forge` and `cast` CLIs from Python scripts and correctly handles the output, with some handy features.
 
@@ -24,7 +24,7 @@ for coin in stables:
 Access anything, effortlessly
 
 ```python
-# Get the hash of the 100th tx in the latest block
+# Get the hash of the 100th transaction from the latest block
 foundry_cli('cast block latest').get("transactions")[100]
 ```
 
