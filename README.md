@@ -25,13 +25,13 @@ Access anything, effortlessly
 
 ```python
 # Get the hash of the 100th tx in the latest block
-foundry_cli(f'cast block latest').get("transactions")[100]
+foundry_cli('cast block latest').get("transactions")[100]
 ```
 
 Automatic output conversion: `str`, `int`, `Decimal`, `dict`, JSON (`str`)
 
 - Whole numbers will be returned as `int` and decimal as `Decimal`, for max precision
-- Multiple values, such as `deployer`, `deployedTo`, `transactionHash` are returned as `dict`
+- Multiple values, such as `deployer`, `deployedTo`, `transactionHash` will be returned as `dict`
 - JSON will be converted to `dict` for superior UX
 
 ### Coverage
