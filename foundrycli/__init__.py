@@ -101,20 +101,36 @@ def _extr_from(out: str, field: str):
     return out[start:end]
 
 
+# function for forming dicts
+def _form_dict(fields: list, vals: list):
+    out = {}
+    i = 0
+    l = len(fields)
+    while(i < l):
+        # convert to camelCase
+        key = ''.join(x for x in fields[i].title() if not x.isspace())
+        key = key[0].lower() + key[1:]
+        out[key] = vals[i]
+        i += 1
+    return out
+
+
+# function for extracting output filed values and formatting as dict
+def _extr_fmt_dict(out: str, fields: list):
+    vals = []
+    for field in fields:
+        vals.append(_extr_from(out, field))
+    return _form_dict(fields, vals)
+
+
 # Note: Do not call directly; use _fmt_out instead
 def _forge_fmt_out(cmd: str, out: str, force_str: bool):
-    # function for formatting extracted create output values as dict
-    def create_to_fmt():
-        return {
-            "deployer": _extr_from(out, "Deployer"),
-            "deployedTo": _extr_from(out, "Deployed to"),
-            "transactionHash": _extr_from(out, "Transaction hash")
-        }
-
     subcmd = cmd.split(" ")[1]
     # format create output
     if(subcmd == "create"):
-        create_to_fmt()
+        out = _extr_fmt_dict(
+            out, ["Deployer", "Deployed to", "Transaction hash"])
+    return out
 
 
 # Note: Do not call directly; use _fmt_out instead
@@ -124,21 +140,14 @@ def _cast_fmt_out(cmd: str, out: str, force_str: bool):
         # switch-case behavior
         fmt = {
             "address": _extr_from(out, "Address"),
-            "new": {
-                "address": _extr_from(out, "Address"),
-                "privateKey": _extr_from(out, "Private Key")
-            },
+            "new": _extr_fmt_dict(out, ["Address", "Private Key"]),
             "sign": _extr_from(out, "Signature"),
-            "vanity": {
-                "address": _extr_from(out, "Address"),
-                "privateKey": _extr_from(out, "Private Key")
-            },
+            "vanity": _extr_fmt_dict(out, ["Address", "Private Key"]),
             "verify": True if out.find("Validation success.") != -1 else False
         }
         return fmt.get(cmd.split(" ")[2])
 
     # function for extracting 4byte-decode output values and formatting as json
-    # Note: Added argument out because of UnboundLocalError
     def four_byte_decode_extr_fmt(out: str):
         # go line by line and form json
         out_parts = out.split("\n")
