@@ -1,8 +1,8 @@
 # foundrycli.py (🔥, 🐍)
 
-**`foundrycli.py`** is a Python library I have made for personal use; now open source.
+**`foundrycli.py`** is a Python library I've made for personal use; now open source.
 
-It let's you access `forge` and `cast` CLIs from Python scripts and correctly handles the output, with some handy features.
+It let's you access `forge` and `cast` CLIs from Python scripts and correctly handles the output, with some handy features:
 
 ### Features
 
@@ -18,7 +18,7 @@ Use in scripts with composable commands
 ```python
 # Calculate VB's $$$ in stables
 for coin in stables:
-    sum += foundry_cli('cast call {coin} "balanceOf(address)(uint256)" {vitalik}')
+    sum += foundry_cli(f'cast call {coin} "balanceOf(address)(uint256)" {vitalik}')
 ```
 
 Access anything, effortlessly
