@@ -2,7 +2,7 @@
 
 **`foundrycli.py`** is a Python library I've made for personal use; now open source.
 
-It let's you access `forge` and `cast` CLIs from Python scripts and correctly handles the output, with some handy features:
+It lets you access `forge` and `cast` CLIs from Python scripts and correctly handles the output, with some handy features:
 
 ### Features
 
@@ -25,7 +25,7 @@ Access anything, effortlessly
 
 ```python
 # Get the hash of the 100th transaction from the latest block
-foundry_cli('cast block latest').get("transactions")[100]
+foundry_cli('cast block latest')["transactions"][100]
 ```
 
 Automatic output conversion: `str`, `int`, `Decimal`, `dict`, JSON (`str`)
@@ -47,7 +47,7 @@ Clone repository
 git clone https://github.com/ZeroEkkusu/foundrycli.py
 ```
 
-Install libraray
+Install library
 
 ```bash
 pip install dist/foundrycli-0.1.0-py3-none-any.whl
